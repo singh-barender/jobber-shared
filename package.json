@@ -1,5 +1,5 @@
 {
-  "name": "9-jobber-shared",
+  "name": "@singh-barender/9-jobber-shared",
   "version": "1.0.0",
   "description": "Helpers library for Jobber app",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/singh-barender/jobber-shared.git"
   },
   "main": "index.js",
   "types": "./src/index.d.ts",
@@ -22,7 +22,7 @@
     }
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

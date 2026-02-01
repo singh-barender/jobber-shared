@@ -1,0 +1,33 @@
+name: Publish
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@singh-barender"
+
+      - run: npm install
+      - run: npm run build
+      - run: |
+          echo @singh-barender:https://npm.pkg.github.com/ > build/.npmrc
+          echo '//npm.pkg.github.com/:_authToken=${JOBBER_NPM_TOKEN}' >> build/.npmrc
+
+      - name: Publish to GitHub Packages
+        run: npm publish --provenance --access public # this makes the package public
+        working-directory: ./build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
